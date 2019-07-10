@@ -88,20 +88,72 @@ const data = [
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+/* Step 1: Create a function that creates a component. You will want your component to look like 
+the template below: 
   
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  <div class="article"> 
+    <h2>{title of the article}</h2> 
+    <p class="date">{date of the article}</p> 
 
-    {three separate paragraph elements}
+    {three separate paragraph elements} 
 
-    <span class='expandButton'></span>
+    <span class='expandButton'></span> 
   </div>
 
   Hint: You will need to use createElement more than once here!
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping 
+  to each peice of the data object above.
+*/
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
+const articles = document.querySelector('.articles');
+
+data.forEach(element => articles.appendChild(createArticle(element.title, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph))
+)
+
+
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph){
+  //define new components
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleFirstParagraph  = document.createElement('p');
+  const articleSecondParagraph = document.createElement('p');
+  const articleThirdParagraph = document.createElement('p');
+  const articleExpandButton = document.createElement('span');
+
+  //setup the structure
+  articles.appendChild(article);
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articleFirstParagraph);
+  article.appendChild(articleSecondParagraph);
+  article.appendChild(articleThirdParagraph);
+  article.appendChild(articleExpandButton);
+
+  //set the class names
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  articleExpandButton.classList.add('expandButton');
+
+  //set the content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleFirstParagraph.textContent = firstParagraph;
+  articleSecondParagraph.textContent = secondParagraph;
+  articleThirdParagraph.textContent = thirdParagraph;
+  articleExpandButton.textContent = "expand";
+
+  return article;
+}
+
+
+
+
+
+
+
+/* 
+  
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
